@@ -1,6 +1,5 @@
 import puppeteer, { Browser, Page, ElementHandle } from "puppeteer";
 import { Stack } from "../lib/stacks";
-import { CodeGenerationModel } from "../lib/models";
 
 const TESTS_ROOT_PATH = process.env.TEST_ROOT_PATH;
 
@@ -22,10 +21,10 @@ describe.skip("e2e tests", () => {
   const stacks = Object.values(Stack).slice(0, DEBUG ? 1 : undefined);
   const models = DEBUG
     ? [
-        CodeGenerationModel.GPT_4O_2024_05_13,
-        // CodeGenerationModel.CLAUDE_3_5_SONNET_2024_06_20,
+        "gpt-4o-2024-05-13",
+        // "claude-3-5-sonnet-2024-06-20",
       ]
-    : Object.values(CodeGenerationModel);
+    : ["gpt-4o-2024-05-13", "claude-3-5-sonnet-2024-06-20"];
 
   beforeAll(async () => {
     browser = await puppeteer.launch({ headless: IS_HEADLESS });
@@ -57,7 +56,6 @@ describe.skip("e2e tests", () => {
           const app = new App(
             page,
             stack,
-            model,
             `create_screenshot_${model}_${stack}`
           );
           await app.init();
@@ -70,12 +68,7 @@ describe.skip("e2e tests", () => {
       it(
         `Create from URL for : ${model} & ${stack}`,
         async () => {
-          const app = new App(
-            page,
-            stack,
-            model,
-            `create_url_${model}_${stack}`
-          );
+          const app = new App(page, stack, `create_url_${model}_${stack}`);
           await app.init();
           // Generate from screenshot
           await app.generateFromUrl("https://a.picoapps.xyz/design-fear");
@@ -91,7 +84,7 @@ describe.skip("e2e tests", () => {
       it(
         `update: ${model}`,
         async () => {
-          const app = new App(page, stack, model, `update_${model}_${stack}`);
+          const app = new App(page, stack, `update_${model}_${stack}`);
           await app.init();
 
           // Generate from screenshot
@@ -117,12 +110,7 @@ describe.skip("e2e tests", () => {
       it.skip(
         `Start from code: ${model}`,
         async () => {
-          const app = new App(
-            page,
-            stack,
-            model,
-            `start_from_code_${model}_${stack}`
-          );
+          const app = new App(page, stack, `start_from_code_${model}_${stack}`);
           await app.init();
 
           await app.importFromCode();
@@ -147,12 +135,10 @@ class App {
   private screenshotPathPrefix: string;
   private page: Page;
   private stack: string;
-  private model: string;
 
-  constructor(page: Page, stack: string, model: string, testId: string) {
+  constructor(page: Page, stack: string, testId: string) {
     this.page = page;
     this.stack = stack;
-    this.model = model;
     this.screenshotPathPrefix = `${RESULTS_DIR}/${testId}`;
   }
 
@@ -168,7 +154,6 @@ class App {
       isImageGenerationEnabled: true,
       editorTheme: "cobalt",
       generatedCodeConfig: this.stack,
-      codeGenerationModel: this.model,
       isTermOfServiceAccepted: false,
       accessCode: null,
     };

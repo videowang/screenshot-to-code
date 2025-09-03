@@ -263,7 +263,7 @@ class ParameterExtractionStage:
             print("Using official OpenAI URL")
 
         # Get the image generation flag from the request. Fall back to True if not provided.
-        should_generate_images = bool(params.get("isImageGenerationEnabled", True))
+        should_generate_images = bool(params.get("isImageGenerationEnabled", False))
 
         # Extract and validate generation type
         generation_type = params.get("generationType", "create")

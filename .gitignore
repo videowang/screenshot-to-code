@@ -1,16 +1,82 @@
+# AI助手相关文件
 .aider*
 
-# Project-related files
-
-# Run logs
+# 项目运行日志
 backend/run_logs/*
 
-# Weird Docker setup related files
+# Docker相关临时文件
 backend/backend/*
 
-# Env vars
-frontend/.env.local
-.env
+# 依赖和构建产物
+node_modules/
+*/node_modules/
+dist/
+*/dist/
+build/
+*/build/
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
 
-# Mac files
+# 编辑器和IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统文件
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 日志文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 临时文件
+*.tmp
+*.temp
+*.cache
+.cache/
+
+# 测试覆盖率报告
+coverage/
+.nyc_output/
+.coverage
+htmlcov/
+
+# 备份文件
+*.bak
+*.backup
+*.orig
+
+# 压缩文件
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# 评估数据（临时）
+evals_data/
+video_evals/
+
+# 环境变量文件（包含敏感信息，不应同步到远程）
+*.env
+*.env.*
+.env
+.env.*
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.*
