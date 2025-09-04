@@ -14,7 +14,7 @@ async def mock_completion(
     code_to_return = (
         TALLY_FORM_VIDEO_PROMPT_MOCK
         if input_mode == "video"
-        else NO_IMAGES_NYTIMES_MOCK_CODE
+        else NO_IMAGES_MENU_MOCK_CODE
     )
 
     for i in range(0, len(code_to_return), STREAM_CHUNK_SIZE):
@@ -162,68 +162,109 @@ NYTIMES_MOCK_CODE = """
 </html>
 """
 
-NO_IMAGES_NYTIMES_MOCK_CODE = """
+NO_IMAGES_MENU_MOCK_CODE = """
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The New York Times - News</title>
+    <title>Delicious Restaurant - Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Libre Franklin', sans-serif;
+            font-family: 'Inter', sans-serif;
+        }
+        .menu-title {
+            font-family: 'Playfair Display', serif;
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto px-4">
-        <header class="border-b border-gray-300 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <button class="text-gray-700"><i class="fas fa-bars"></i></button>
-                    <button class="text-gray-700"><i class="fas fa-search"></i></button>
-                    <div class="text-xs uppercase tracking-widest">Tuesday, November 14, 2023<br>Today's Paper</div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button class="bg-black text-white px-4 py-1 text-xs uppercase tracking-widest">Give the times</button>
-                    <div class="text-xs">Account</div>
-                </div>
-            </div>
-            <nav class="flex justify-between items-center py-4">
-                <div class="flex space-x-4">
-                    <a href="#" class="text-xs uppercase tracking-widest text-gray-700">U.S.</a>
-                    <!-- Add other navigation links as needed -->
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-xs uppercase tracking-widest text-gray-700">Cooking</a>
-                    <!-- Add other navigation links as needed -->
-                </div>
-            </nav>
+<body class="bg-amber-50">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="menu-title text-5xl font-bold text-amber-900 mb-4">Delicious Restaurant</h1>
+            <p class="text-lg text-amber-700">Authentic flavors, fresh ingredients, unforgettable dining experience</p>
         </header>
-        <main>
-            <section class="py-6">
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="col-span-2">
-                        <article class="mb-4">
-                            <h2 class="text-xl font-bold mb-2">Israeli Military Raids Gaza's Largest Hospital</h2>
-                            <p class="text-gray-700 mb-2">Israeli troops have entered the Al-Shifa Hospital complex, where conditions have grown dire and Israel says Hamas fighters are embedded.</p>
-                            <a href="#" class="text-blue-600 text-sm">See more updates <i class="fas fa-external-link-alt"></i></a>
-                        </article>
-                        <!-- Repeat for each news item -->
+        
+        <main class="max-w-4xl mx-auto">
+            <section class="mb-12">
+                <h2 class="menu-title text-3xl font-bold text-amber-900 mb-6 border-b-2 border-amber-300 pb-2">Appetizers</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Crispy Spring Rolls</h3>
+                            <span class="text-lg font-bold text-amber-600">$8.99</span>
+                        </div>
+                        <p class="text-gray-600">Fresh vegetables wrapped in crispy pastry, served with sweet chili sauce</p>
                     </div>
-                    <div class="col-span-1">
-                        <article class="mb-4">
-                            <h2 class="text-xl font-bold mb-2">From Elvis to Elopements, the Evolution of the Las Vegas Wedding</h2>
-                            <p class="text-gray-700 mb-2">The glittering city that attracts thousands of couples seeking unconventional nuptials has grown beyond the drive-through wedding.</p>
-                            <a href="#" class="text-blue-600 text-sm">8 MIN READ</a>
-                        </article>
-                        <!-- Repeat for each news item -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Garlic Bread</h3>
+                            <span class="text-lg font-bold text-amber-600">$6.50</span>
+                        </div>
+                        <p class="text-gray-600">Homemade bread with roasted garlic butter and fresh herbs</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-12">
+                <h2 class="menu-title text-3xl font-bold text-amber-900 mb-6 border-b-2 border-amber-300 pb-2">Main Courses</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Grilled Salmon</h3>
+                            <span class="text-lg font-bold text-amber-600">$24.99</span>
+                        </div>
+                        <p class="text-gray-600">Fresh Atlantic salmon with lemon herb butter, served with roasted vegetables</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Beef Tenderloin</h3>
+                            <span class="text-lg font-bold text-amber-600">$32.99</span>
+                        </div>
+                        <p class="text-gray-600">Premium cut beef with red wine reduction and garlic mashed potatoes</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Chicken Parmesan</h3>
+                            <span class="text-lg font-bold text-amber-600">$19.99</span>
+                        </div>
+                        <p class="text-gray-600">Breaded chicken breast with marinara sauce and melted mozzarella</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Vegetarian Pasta</h3>
+                            <span class="text-lg font-bold text-amber-600">$16.99</span>
+                        </div>
+                        <p class="text-gray-600">Fresh pasta with seasonal vegetables in creamy alfredo sauce</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-12">
+                <h2 class="menu-title text-3xl font-bold text-amber-900 mb-6 border-b-2 border-amber-300 pb-2">Desserts</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Chocolate Lava Cake</h3>
+                            <span class="text-lg font-bold text-amber-600">$9.99</span>
+                        </div>
+                        <p class="text-gray-600">Warm chocolate cake with molten center, served with vanilla ice cream</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800">Tiramisu</h3>
+                            <span class="text-lg font-bold text-amber-600">$8.50</span>
+                        </div>
+                        <p class="text-gray-600">Classic Italian dessert with coffee-soaked ladyfingers and mascarpone</p>
                     </div>
                 </div>
             </section>
         </main>
+        
+        <footer class="text-center mt-12 pt-8 border-t border-amber-300">
+            <p class="text-amber-700">Open Daily: 11:00 AM - 10:00 PM | Reservations: (555) 123-4567</p>
+        </footer>
     </div>
 </body>
 </html>

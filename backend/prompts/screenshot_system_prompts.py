@@ -10,8 +10,8 @@ using Tailwind, HTML and JS.
 - Pay close attention to background color, text color, font size, font family, 
 padding, margin, border, etc. Match the colors and sizes exactly.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 
 In terms of libraries,
@@ -33,8 +33,8 @@ using CSS, HTML and JS.
 - Pay close attention to background color, text color, font size, font family, 
 padding, margin, border, etc. Match the colors and sizes exactly.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 
 In terms of libraries,
@@ -55,8 +55,8 @@ using Bootstrap, HTML and JS.
 - Pay close attention to background color, text color, font size, font family, 
 padding, margin, border, etc. Match the colors and sizes exactly.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 
 In terms of libraries,
@@ -78,8 +78,8 @@ using React and Tailwind CSS.
 - Pay close attention to background color, text color, font size, font family, 
 padding, margin, border, etc. Match the colors and sizes exactly.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 
 In terms of libraries,
@@ -105,8 +105,8 @@ using Ionic and Tailwind CSS.
 - Pay close attention to background color, text color, font size, font family, 
 padding, margin, border, etc. Match the colors and sizes exactly.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 
 In terms of libraries,
@@ -137,8 +137,8 @@ using Vue and Tailwind CSS.
 - Pay close attention to background color, text color, font size, font family, 
 padding, margin, border, etc. Match the colors and sizes exactly.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 - Use Vue using the global build like so:
 
@@ -177,8 +177,8 @@ You take screenshots of a reference web page from the user, and then build a SVG
 - Pay close attention to background color, text color, font size, font family, 
 padding, margin, border, etc. Match the colors and sizes exactly.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 - You can use Google Fonts
 

@@ -4,7 +4,7 @@ GENERAL_INSTRUCTIONS = """
 - Make sure to make it look modern and sleek.
 - Use modern, professional fonts and colors.
 - Follow UX best practices.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later."""
 
 LIBRARY_INSTRUCTIONS = """

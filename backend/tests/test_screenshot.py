@@ -43,7 +43,7 @@ class TestNormalizeUrl:
     def test_localhost_urls(self):
         """Test localhost URLs."""
         assert normalize_url("localhost") == "https://localhost"
-        assert normalize_url("localhost:3000") == "https://localhost:3000"
+        assert normalize_url("localhost:5173") == "https://localhost:5173"
         assert normalize_url("http://localhost:8080") == "http://localhost:8080"
     
     def test_ip_address_urls(self):

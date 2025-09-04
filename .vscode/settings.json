@@ -1,5 +1,7 @@
 {
   "python.analysis.typeCheckingMode": "strict",
   "python.analysis.extraPaths": ["./backend"],
-  "python.autoComplete.extraPaths": ["./backend"]
+  "python.autoComplete.extraPaths": ["./backend"],
+  "python.pythonPath": "/Users/samuel/Library/Caches/pypoetry/virtualenvs/backend-ZOLOFDW--py3.13/bin/python",
+  "python.defaultInterpreterPath": "/Users/samuel/Library/Caches/pypoetry/virtualenvs/backend-ZOLOFDW--py3.13/bin/python"
 }

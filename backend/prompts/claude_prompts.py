@@ -64,9 +64,9 @@ update it to look more like the reference image(The first image).
 padding, margin, border, etc. Match the colors and sizes exactly.
 - In particular, pay attention to background color and overall color scheme.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
 - Make sure to always get the layout right (if things are arranged in a row in the screenshot, they should be in a row in the app as well)
-- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each news item -->" or bad things will happen.
+- Repeat elements as needed to match the screenshot. For example, if there are 15 items, the code should have 15 items. DO NOT LEAVE comments like "<!-- Repeat for each item -->" or bad things will happen.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.
 
 In terms of libraries,
@@ -94,7 +94,7 @@ update it to look more like the reference image(The first image).
 padding, margin, border, etc. Match the colors and sizes exactly.
 - In particular, pay attention to background color and overall color scheme.
 - Use the exact text from the screenshot.
-- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other news items ... -->" in place of writing the full code. WRITE THE FULL CODE.
+- Do not add comments in the code such as "<!-- Add other navigation links as needed -->" and "<!-- ... other items ... -->" in place of writing the full code. WRITE THE FULL CODE.
 - Make sure to always get the layout right (if things are arranged in a row in the screenshot, they should be in a row in the app as well)
 - CREATE REUSABLE COMPONENTS FOR REPEATING ELEMENTS. For example, if there are 15 similar items in the screenshot, your code should include a reusable component that generates these items. and use loops to instantiate these components as needed.
 - For images, use placeholder images from https://placehold.co and include a detailed description of the image in the alt text so that an image generation AI can generate the image later.

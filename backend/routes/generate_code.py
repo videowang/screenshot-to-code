@@ -17,6 +17,7 @@ from config import (
     SHOULD_MOCK_AI_RESPONSE,
 )
 from custom_types import InputMode
+from model_selection_config import get_variant_models
 from llm import (
     Completion,
     Llm,
@@ -320,85 +321,29 @@ class ModelSelectionStage:
         self,
         generation_type: Literal["create", "update"],
         input_mode: InputMode,
-        openai_api_key: str | None,
-        anthropic_api_key: str | None,
+        openai_api_key: str | None = None,
+        anthropic_api_key: str | None = None,
         gemini_api_key: str | None = None,
     ) -> List[Llm]:
-        """Select appropriate models based on available API keys"""
+        """根据配置选择模型，不再检查API密钥"""
         try:
-            variant_models = self._get_variant_models(
+            variant_models = get_variant_models(
                 generation_type,
                 input_mode,
-                NUM_VARIANTS,
-                openai_api_key,
-                anthropic_api_key,
-                gemini_api_key,
+                NUM_VARIANTS
             )
 
-            # Print the variant models (one per line)
+            # 打印选择的模型
             print("Variant models:")
             for index, model in enumerate(variant_models):
                 print(f"Variant {index + 1}: {model.value}")
 
             return variant_models
-        except Exception:
-            await self.throw_error(
-                "No OpenAI or Anthropic API key found. Please add the environment variable "
-                "OPENAI_API_KEY or ANTHROPIC_API_KEY to backend/.env or in the settings dialog. "
-                "If you add it to .env, make sure to restart the backend server."
-            )
-            raise Exception("No OpenAI or Anthropic key")
+        except Exception as e:
+            await self.throw_error(f"模型选择失败: {str(e)}")
+            raise
 
-    def _get_variant_models(
-        self,
-        generation_type: Literal["create", "update"],
-        input_mode: InputMode,
-        num_variants: int,
-        openai_api_key: str | None,
-        anthropic_api_key: str | None,
-        gemini_api_key: str | None,
-    ) -> List[Llm]:
-        """Simple model cycling that scales with num_variants"""
 
-        claude_model = Llm.CLAUDE_3_7_SONNET_2025_02_19
-
-        # For text input mode, use Claude 4 Sonnet as third option
-        # For other input modes (image/video), use Gemini as third option
-        if input_mode == "text":
-            third_model = Llm.CLAUDE_4_SONNET_2025_05_14
-        else:
-            # Gemini only works for create right now
-            if generation_type == "create":
-                third_model = Llm.GEMINI_2_0_FLASH
-            else:
-                third_model = claude_model
-
-        # Define models based on available API keys
-        if (
-            openai_api_key
-            and anthropic_api_key
-            and (gemini_api_key or input_mode == "text")
-        ):
-            models = [
-                Llm.GPT_4_1_2025_04_14,
-                claude_model,
-                third_model,
-            ]
-        elif openai_api_key and anthropic_api_key:
-            models = [claude_model, Llm.GPT_4_1_2025_04_14]
-        elif anthropic_api_key:
-            models = [claude_model, Llm.CLAUDE_3_5_SONNET_2024_06_20]
-        elif openai_api_key:
-            models = [Llm.GPT_4_1_2025_04_14, Llm.GPT_4O_2024_11_20]
-        else:
-            raise Exception("No OpenAI or Anthropic key")
-
-        # Cycle through models: [A, B] with num=5 becomes [A, B, A, B, A]
-        selected_models: List[Llm] = []
-        for i in range(num_variants):
-            selected_models.append(models[i % len(models)])
-
-        return selected_models
 
 
 class PromptCreationStage:

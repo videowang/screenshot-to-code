@@ -2,5 +2,7 @@
   "exclude": ["image_generation.py"],
   "typeCheckingMode": "basic",
   "reportMissingTypeStubs": "none",
-  "reportUnknownVariableType": "warning"
+  "reportUnknownVariableType": "warning",
+  "venvPath": "/Users/samuel/Library/Caches/pypoetry/virtualenvs",
+  "venv": "backend-ZOLOFDW--py3.13"
 }
