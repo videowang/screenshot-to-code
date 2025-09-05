@@ -1,18 +1,18 @@
 import copy
 import json
-from typing import List
+from typing import Sequence
 from openai.types.chat import ChatCompletionMessageParam
 
 
-def pprint_prompt(prompt_messages: List[ChatCompletionMessageParam]):
+def pprint_prompt(prompt_messages: Sequence[ChatCompletionMessageParam]):
     print(json.dumps(truncate_data_strings(prompt_messages), indent=4))
 
 
-def format_prompt_summary(prompt_messages: List[ChatCompletionMessageParam], truncate: bool = True) -> str:
+def format_prompt_summary(prompt_messages: Sequence[ChatCompletionMessageParam], truncate: bool = True) -> str:
     parts: list[str] = []
     for message in prompt_messages:
         role = message["role"]
-        content = message["content"]
+        content = message.get("content", "")
         text = ""
         image_count = 0
 
@@ -35,7 +35,7 @@ def format_prompt_summary(prompt_messages: List[ChatCompletionMessageParam], tru
     return "\n".join(parts)
 
 
-def print_prompt_summary(prompt_messages: List[ChatCompletionMessageParam], truncate: bool = True):
+def print_prompt_summary(prompt_messages: Sequence[ChatCompletionMessageParam], truncate: bool = True):
     summary = format_prompt_summary(prompt_messages, truncate)
     lines = summary.split('\n')
     
@@ -75,7 +75,7 @@ def print_prompt_summary(prompt_messages: List[ChatCompletionMessageParam], trun
     print()
 
 
-def truncate_data_strings(data: List[ChatCompletionMessageParam]):  # type: ignore
+def truncate_data_strings(data: Sequence[ChatCompletionMessageParam]):  # type: ignore
     # Deep clone the data to avoid modifying the original object
     cloned_data = copy.deepcopy(data)
 

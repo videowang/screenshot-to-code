@@ -72,6 +72,9 @@ async def stream_claude_response(
     # Claude 3.7 Sonnet can support higher max tokens
     if model_name == "claude-3-7-sonnet-20250219":
         max_tokens = 20000
+    # Claude 3 Haiku has a lower max token limit
+    elif model_name == "claude-3-haiku-20240307":
+        max_tokens = 4096
 
     # Translate OpenAI messages to Claude messages
 
@@ -174,7 +177,9 @@ async def stream_claude_response_native(
                 await callback(text)
 
         response = await stream.get_final_message()
-        response_text = response.content[0].text
+        # Safely extract text from response content
+        first_content = response.content[0]
+        response_text = getattr(first_content, 'text', str(first_content))
 
         # Write each pass's code to .html file and thinking to .txt file
         if IS_DEBUG_ENABLED:
@@ -184,12 +189,13 @@ async def stream_claude_response_native(
             )
             debug_file_writer.write_to_file(
                 f"thinking_pass_{current_pass_num - 1}.txt",
-                response_text.split("</thinking>")[0],
+                str(response_text).split("</thinking>")[0],
             )
 
         # Set up messages array for next pass
+        content_text = getattr(response.content[0], 'text', str(response.content[0]))
         messages += [
-            {"role": "assistant", "content": str(prefix) + response.content[0].text},
+            {"role": "assistant", "content": str(prefix) + content_text},
             {
                 "role": "user",
                 "content": "You've done a good job with a first draft. Improve this further based on the original instructions so that the app is fully functional and looks like the original video of the app we're trying to replicate.",

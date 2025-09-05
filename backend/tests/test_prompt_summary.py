@@ -1,10 +1,12 @@
 import io
 import sys
+from typing import cast
+from openai.types.chat import ChatCompletionMessageParam
 from utils import format_prompt_summary, print_prompt_summary
 
 
 def test_format_prompt_summary():
-    messages = [
+    messages = cast(list[ChatCompletionMessageParam], [
         {"role": "system", "content": "lorem ipsum dolor sit amet"},
         {
             "role": "user",
@@ -20,7 +22,7 @@ def test_format_prompt_summary():
                 },
             ],
         },
-    ]
+    ])
 
     summary = format_prompt_summary(messages)
     assert "SYSTEM: lorem ipsum" in summary
@@ -28,10 +30,10 @@ def test_format_prompt_summary():
 
 
 def test_print_prompt_summary():
-    messages = [
+    messages = cast(list[ChatCompletionMessageParam], [
         {"role": "system", "content": "short message"},
         {"role": "user", "content": "hello"},
-    ]
+    ])
 
     # Capture stdout
     captured_output = io.StringIO()
@@ -53,10 +55,10 @@ def test_print_prompt_summary():
 
 
 def test_print_prompt_summary_long_content():
-    messages = [
+    messages = cast(list[ChatCompletionMessageParam], [
         {"role": "system", "content": "This is a very long system message that should be wrapped properly within the box boundaries"},
         {"role": "user", "content": "short"},
-    ]
+    ])
 
     # Capture stdout
     captured_output = io.StringIO()
@@ -83,9 +85,9 @@ def test_print_prompt_summary_long_content():
 
 
 def test_format_prompt_summary_no_truncate():
-    messages = [
+    messages = cast(list[ChatCompletionMessageParam], [
         {"role": "system", "content": "This is a very long message that would normally be truncated at 40 characters but should be shown in full"},
-    ]
+    ])
 
     # Test with truncation (default)
     summary_truncated = format_prompt_summary(messages)
@@ -99,9 +101,9 @@ def test_format_prompt_summary_no_truncate():
 
 
 def test_print_prompt_summary_no_truncate():
-    messages = [
+    messages = cast(list[ChatCompletionMessageParam], [
         {"role": "system", "content": "This is a very long message that would normally be truncated but should be shown in full when truncate=False"},
-    ]
+    ])
 
     # Capture stdout
     captured_output = io.StringIO()

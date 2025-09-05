@@ -91,11 +91,11 @@ async def main():
     end_time = time.time()
 
     # Prepend the response prefix to the completion
-    completion = response_prefix + completion
+    completion_text = response_prefix + str(completion)
 
     # Extract the outputs
-    html_content = extract_tag_content("html", completion)
-    thinking = extract_tag_content("thinking", completion)
+    html_content = extract_tag_content("html", completion_text)
+    thinking = extract_tag_content("thinking", completion_text)
 
     print(thinking)
     print(f"Operation took {end_time - start_time} seconds")

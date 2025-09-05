@@ -273,14 +273,33 @@ class ParameterExtractionStage:
             raise ValueError(f"Invalid generation type: {generation_type}")
         generation_type = cast(Literal["create", "update"], generation_type)
 
-        # Extract prompt content
-        prompt = params.get("prompt", {"text": "", "images": []})
+        # Extract prompt content with proper type handling
+        default_prompt: PromptContent = {"text": "", "images": []}
+        prompt_raw = params.get("prompt", default_prompt)
+        if isinstance(prompt_raw, str):
+            # If prompt is a string, convert to PromptContent format
+            prompt: PromptContent = {"text": prompt_raw, "images": []}
+        else:
+            # Assume it's already in the correct format
+            prompt = prompt_raw
 
-        # Extract history (default to empty list)
-        history = params.get("history", [])
+        # Extract history with proper type handling
+        default_history: List[Dict[str, Any]] = []
+        history_raw = params.get("history", default_history)
+        if isinstance(history_raw, str):
+            # If history is a string, treat as empty list
+            history: List[Dict[str, Any]] = []
+        else:
+            # Assume it's already a list
+            history = history_raw
 
-        # Extract imported code flag
-        is_imported_from_code = params.get("isImportedFromCode", False)
+        # Extract imported code flag with proper type handling
+        is_imported_raw = params.get("isImportedFromCode", False)
+        if isinstance(is_imported_raw, str):
+            # Convert string to boolean
+            is_imported_from_code = is_imported_raw.lower() in ("true", "1", "yes")
+        else:
+            is_imported_from_code = bool(is_imported_raw)
 
         return ExtractedParams(
             stack=validated_stack,
@@ -562,19 +581,13 @@ class ParallelGenerationStage:
                 if self.anthropic_api_key is None:
                     raise Exception("Anthropic API key is missing.")
 
-                # For creation, use Claude Sonnet 3.7
-                # For updates, we use Claude Sonnet 3.5 until we have tested Claude Sonnet 3.7
-                if params["generationType"] == "create":
-                    claude_model = Llm.CLAUDE_3_7_SONNET_2025_02_19
-                else:
-                    claude_model = Llm.CLAUDE_3_5_SONNET_2024_06_20
-
+                # 直接使用配置选择的Claude模型，不再进行运行时替换
                 tasks.append(
                     stream_claude_response(
                         prompt_messages,
                         api_key=self.anthropic_api_key,
                         callback=lambda x, i=index: self._process_chunk(x, i),
-                        model_name=claude_model.value,
+                        model_name=model.value,
                     )
                 )
 

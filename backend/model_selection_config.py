@@ -27,7 +27,7 @@ MODEL_SELECTION_CONFIG: Dict[str, List[Llm]] = {
     "update_non_text": [
         Llm.GPT_4_1_2025_04_14,
         Llm.CLAUDE_3_7_SONNET_2025_02_19,
-        Llm.CLAUDE_3_7_SONNET_2025_02_19,  # Gemini不支持更新，使用Claude替代
+        Llm.CLAUDE_3_7_SONNET_2025_02_19,  
         Llm.GPT_4O_2024_11_20,
         Llm.CLAUDE_3_5_SONNET_2024_10_22,
     ],

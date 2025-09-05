@@ -79,7 +79,7 @@ async def stream_gemini_response(
         },
         config=config,
     ):
-        if chunk.candidates and len(chunk.candidates) > 0:
+        if chunk.candidates and len(chunk.candidates) > 0 and chunk.candidates[0].content and chunk.candidates[0].content.parts:
             for part in chunk.candidates[0].content.parts:
                 if not part.text:
                     continue
