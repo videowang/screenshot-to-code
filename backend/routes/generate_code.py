@@ -553,14 +553,12 @@ class ParallelGenerationStage:
         prompt_messages: List[ChatCompletionMessageParam],
         params: Dict[str, str],
     ) -> List[Coroutine[Any, Any, Completion]]:
-        """Create generation tasks for each variant model"""
+        """Create generation tasks for each variant model without API key validation"""
         tasks: List[Coroutine[Any, Any, Completion]] = []
 
         for index, model in enumerate(variant_models):
             if model in OPENAI_MODELS:
-                if self.openai_api_key is None:
-                    raise Exception("OpenAI API key is missing.")
-
+                # 无条件创建任务，API Key检查在执行时进行
                 tasks.append(
                     self._stream_openai_with_error_handling(
                         prompt_messages,
@@ -568,26 +566,22 @@ class ParallelGenerationStage:
                         index=index,
                     )
                 )
-            elif GEMINI_API_KEY and model in GEMINI_MODELS:
+            elif model in GEMINI_MODELS:
+                # 无条件创建任务，API Key检查在执行时进行
                 tasks.append(
-                    stream_gemini_response(
+                    self._stream_gemini_with_error_handling(
                         prompt_messages,
-                        api_key=GEMINI_API_KEY,
-                        callback=lambda x, i=index: self._process_chunk(x, i),
                         model_name=model.value,
+                        index=index,
                     )
                 )
             elif model in ANTHROPIC_MODELS:
-                if self.anthropic_api_key is None:
-                    raise Exception("Anthropic API key is missing.")
-
-                # 直接使用配置选择的Claude模型，不再进行运行时替换
+                # 无条件创建任务，API Key检查在执行时进行
                 tasks.append(
-                    stream_claude_response(
+                    self._stream_claude_with_error_handling(
                         prompt_messages,
-                        api_key=self.anthropic_api_key,
-                        callback=lambda x, i=index: self._process_chunk(x, i),
                         model_name=model.value,
+                        index=index,
                     )
                 )
 
@@ -605,7 +599,20 @@ class ParallelGenerationStage:
     ) -> Completion:
         """Wrap OpenAI streaming with specific error handling"""
         try:
-            assert self.openai_api_key is not None
+            # 在执行阶段检查API Key
+            if self.openai_api_key is None:
+                error_message = (
+                    "OpenAI API key is missing. Please add your OpenAI API key in the settings "
+                    "to generate code with OpenAI models."
+                    + (
+                        " Alternatively, you can purchase code generation credits directly on this website."
+                        if IS_PROD
+                        else ""
+                    )
+                )
+                await self.send_message("variantError", error_message, index)
+                raise VariantErrorAlreadySent(Exception("OpenAI API key is missing"))
+            
             return await stream_openai_response(
                 prompt_messages,
                 api_key=self.openai_api_key,
@@ -652,6 +659,76 @@ class ParallelGenerationStage:
                 )
             )
             await self.send_message("variantError", error_message, index)
+            raise VariantErrorAlreadySent(e)
+
+    async def _stream_claude_with_error_handling(
+        self,
+        prompt_messages: List[ChatCompletionMessageParam],
+        model_name: str,
+        index: int,
+    ) -> Completion:
+        """Wrap Claude streaming with specific error handling"""
+        try:
+            # 在执行阶段检查API Key
+            if self.anthropic_api_key is None or self.anthropic_api_key == "":
+                error_message = (
+                    "Anthropic API key is missing. Please add your Anthropic API key in the settings "
+                    "to generate code with Claude models."
+                    + (
+                        " Alternatively, you can purchase code generation credits directly on this website."
+                        if IS_PROD
+                        else ""
+                    )
+                )
+                await self.send_message("variantError", error_message, index)
+                raise VariantErrorAlreadySent(Exception("Anthropic API key is missing"))
+            
+            return await stream_claude_response(
+                prompt_messages,
+                api_key=self.anthropic_api_key,
+                callback=lambda x: self._process_chunk(x, index),
+                model_name=model_name,
+            )
+        except Exception as e:
+            print(f"[VARIANT {index + 1}] Claude Unexpected error", e)
+            await self.send_message(
+                "variantError", f"Claude error: {str(e)}", index
+            )
+            raise VariantErrorAlreadySent(e)
+
+    async def _stream_gemini_with_error_handling(
+        self,
+        prompt_messages: List[ChatCompletionMessageParam],
+        model_name: str,
+        index: int,
+    ) -> Completion:
+        """Wrap Gemini streaming with specific error handling"""
+        try:
+            # 在执行阶段检查API Key
+            if GEMINI_API_KEY is None or GEMINI_API_KEY == "":
+                error_message = (
+                    "Gemini API key is missing. Please add your Gemini API key in the settings "
+                    "to generate code with Gemini models."
+                    + (
+                        " Alternatively, you can purchase code generation credits directly on this website."
+                        if IS_PROD
+                        else ""
+                    )
+                )
+                await self.send_message("variantError", error_message, index)
+                raise VariantErrorAlreadySent(Exception("Gemini API key is missing"))
+            
+            return await stream_gemini_response(
+                prompt_messages,
+                api_key=GEMINI_API_KEY,
+                callback=lambda x: self._process_chunk(x, index),
+                model_name=model_name,
+            )
+        except Exception as e:
+            print(f"[VARIANT {index + 1}] Gemini Unexpected error", e)
+            await self.send_message(
+                "variantError", f"Gemini error: {str(e)}", index
+            )
             raise VariantErrorAlreadySent(e)
 
     async def _perform_image_generation(

@@ -28,7 +28,7 @@ function Variants() {
         const code = event.code;
         if (code >= "Digit1" && code <= "Digit9") {
           const variantIndex = parseInt(code.replace("Digit", "")) - 1;
-          
+
           // Only switch if the variant exists and component is visible
           if (
             commit &&
