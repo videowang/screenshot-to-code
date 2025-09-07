@@ -27,3 +27,10 @@ DEBUG_DIR = os.environ.get("DEBUG_DIR", "")
 # Set to True when running in production (on the hosted version)
 # Used as a feature flag to enable or disable certain features
 IS_PROD = os.environ.get("IS_PROD", False)
+
+# API Timeout configurations (in seconds)
+GEMINI_DEFAULT_TIMEOUT = int(os.environ.get("GEMINI_DEFAULT_TIMEOUT", "300"))  # 5 minutes
+GEMINI_THINKING_TIMEOUT = int(os.environ.get("GEMINI_THINKING_TIMEOUT", "900"))  # 15 minutes
+GEMINI_PREVIEW_TIMEOUT = int(os.environ.get("GEMINI_PREVIEW_TIMEOUT", "1200"))  # 20 minutes
+OPENAI_TIMEOUT = int(os.environ.get("OPENAI_TIMEOUT", "600"))  # 10 minutes
+ANTHROPIC_TIMEOUT = int(os.environ.get("ANTHROPIC_TIMEOUT", "600"))  # 10 minutes

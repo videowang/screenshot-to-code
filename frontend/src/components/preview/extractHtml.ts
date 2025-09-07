@@ -1,16 +1,21 @@
-// Not robust enough to support <html lang='en'> for instance
+// Robust function to extract HTML content, supporting attributes like <html lang='en'>
 export function extractHtml(code: string): string {
-  const lastHtmlStartIndex = code.lastIndexOf("<html>");
-  let htmlEndIndex = code.indexOf("</html>", lastHtmlStartIndex);
-
-  if (lastHtmlStartIndex !== -1) {
-    // If "</html>" is found, adjust htmlEndIndex to include the "</html>" tag
-    if (htmlEndIndex !== -1) {
-      htmlEndIndex += "</html>".length;
-      return code.slice(lastHtmlStartIndex, htmlEndIndex);
-    }
-    // If "</html>" is not found, return the rest of the string starting from the last "<html>"
-    return code.slice(lastHtmlStartIndex);
+  // Use regex to find the last complete HTML block with attributes support
+  const htmlRegex = /<html[^>]*>[\s\S]*?<\/html>/gi;
+  const matches = code.match(htmlRegex);
+  
+  if (matches && matches.length > 0) {
+    // Return the last complete HTML block
+    return matches[matches.length - 1];
   }
+  
+  // Fallback: try to find incomplete HTML block (without closing tag)
+  const incompleteHtmlRegex = /<html[^>]*>[\s\S]*$/i;
+  const incompleteMatch = code.match(incompleteHtmlRegex);
+  
+  if (incompleteMatch) {
+    return incompleteMatch[0];
+  }
+  
   return "";
 }

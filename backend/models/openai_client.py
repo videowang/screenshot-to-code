@@ -3,6 +3,7 @@ from typing import Awaitable, Callable, List
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletionMessageParam, ChatCompletionChunk
 from llm import Completion
+from config import OPENAI_TIMEOUT
 
 
 async def stream_openai_response(
@@ -19,8 +20,10 @@ async def stream_openai_response(
     params = {
         "model": model_name,
         "messages": messages,
-        "timeout": 600,
+        "timeout": OPENAI_TIMEOUT,
     }
+    
+    print(f"Starting OpenAI API call for model {model_name} with timeout {OPENAI_TIMEOUT}s")
 
     # O1 doesn't support streaming or temperature
     if model_name not in ["o1-2024-12-17", "o4-mini-2025-04-16", "o3-2025-04-16"]:

@@ -3,7 +3,7 @@ import time
 from typing import Any, Awaitable, Callable, Dict, List, Tuple, cast
 from anthropic import AsyncAnthropic
 from openai.types.chat import ChatCompletionMessageParam
-from config import IS_DEBUG_ENABLED
+from config import IS_DEBUG_ENABLED, ANTHROPIC_TIMEOUT
 from debug.DebugFileWriter import DebugFileWriter
 from image_processing.utils import process_image
 from utils import pprint_prompt
@@ -163,11 +163,14 @@ async def stream_claude_response_native(
         )
 
         pprint_prompt(messages_to_send)
+        
+        print(f"Starting Claude API call for model {model_name} with timeout {ANTHROPIC_TIMEOUT}s")
 
         async with client.messages.stream(
             model=model_name,
             max_tokens=max_tokens,
             temperature=temperature,
+            timeout=ANTHROPIC_TIMEOUT,
             system=system_prompt,
             messages=messages_to_send,  # type: ignore
         ) as stream:
