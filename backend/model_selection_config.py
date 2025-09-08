@@ -15,7 +15,7 @@ MODEL_SELECTION_CONFIG: Dict[str, List[Llm]] = {
     ],
     # 非文本创建模式 - 优先考虑多模态处理和thinking能力
     "create_non_text": [
- #       Llm.GEMINI_2_5_FLASH_PREVIEW_05_20, # 最强thinking能力，最高token限制
+        # Llm.GEMINI_2_5_FLASH_PREVIEW_05_20, # Gemini 2.5 Flash的预发布版本
         Llm.GEMINI_2_5_PRO,                 # Pro版本，高质量thinking
         Llm.GEMINI_2_5_FLASH,               # Flash版本，平衡速度和质量
         Llm.GEMINI_2_0_FLASH,               # 2.0版本，稳定多模态
